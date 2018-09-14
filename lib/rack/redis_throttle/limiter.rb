@@ -53,7 +53,7 @@ module Rack
         begin
           key   = cache_key(request)
           count = cache.incr(key)
-          cache.expire(key, 1.hour) if count == 1
+          cache.expire(key, 24.hour) if count == 1
           count
         rescue Redis::BaseConnectionError => e
           puts "ERROR: Redis connection not available. Rescuing cache.incr(key)" if ENV['DEBUG']
